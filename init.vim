@@ -14,6 +14,8 @@
 " https://github.com/tpope
 " Gilles Castel (ultisnips)
 " https://castel.dev/
+" Greg Hurell
+" https://github.com/wincent
 "
 " Structure:
 " PLUGS
@@ -22,15 +24,15 @@
 " FUNCTIONS
 " PLUG SETTINGS
 "
-"
 " TODO:
-" adding figures for math pages
+" Adding figures for math pages
 " LSP for less writing and quicker workflow
 " Treesitter for syntax highlighting
+" Use native plugin of neovim
 
 " PLUGS
-call plug#begin()
 
+call plug#begin()
 " wiki plugins
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -52,9 +54,7 @@ Plug 'sirver/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-
 call plug#end()
-
 
 " AUTOCOMMANDS
 
@@ -72,14 +72,13 @@ augroup CPT " This is for the encrypted files, ending .cpt, I use the program cc
   au BufWritePost *.cpt norm! `k
 augroup END
 
-
-
 augroup markdown
     autocmd!
     "autocmd BufWritePost *.md call MyPandocCompilerWithDebug() " Adds a autowrite command that :todo: could be improved with asyncrun()
     " ColorEquation are to add easy colorized math equations from display
     " math.
     autocmd Filetype pandoc nnoremap <leader>c :call MyPandocOpenZathura()<cr>
+    " TODO make all the numbers fall into 1
     autocmd Filetype pandoc nnoremap <leader>1 :call ColorEquation1()<cr>
     autocmd Filetype pandoc nnoremap <leader>2 :call ColorEquation(2)<cr>
     autocmd Filetype pandoc nnoremap <leader>3 :call ColorEquation(3)<cr>
@@ -174,7 +173,7 @@ set undoreload=100000  " maximum number lines to save for undo on a buffer reloa
 
 set noshowcmd
 set splitright  " i prefer splitting right and below
-set splitbelow
+set splitbelow " might change
 set viminfo='20,<1000  
 set foldcolumn=0
 
@@ -208,15 +207,12 @@ function! SRSTODOMEDIUM()
     norm! p
 endfunction
 
-
 function! SRSTODOLONG()
     let page = system("$HOME/myScripts/myTodoLong")
     execute "edit " . page
     norm! gg
     norm! p
 endfunction
-
-
 
 function! MyTexCompile()
     w
@@ -276,7 +272,7 @@ function! ColorEquationReset()
     endif
 endfunction
 
-
+" TODO fix config so that this is not necessary
 function! PandocToggle()
     if (&ft=='vimwiki')
         :set filetype=pandoc
@@ -325,11 +321,6 @@ cnoremap <Esc> <C-c>
 inoremap <c-c> <ESC>
 nnoremap <C-z> <Esc>  " disable terminal ctrl-z
 
-" map S to replace current word with pasteboard
-nnoremap S $s
-"nnoremap cc "_cc
-
-
 let mapleader = ','
 let maplocalleader = "\\"
 "my change
@@ -338,9 +329,8 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 nnoremap <space> :nohl<CR>
 
-"yank a line
+"yank a line TODO save cursor position
 nnoremap yo ^y$
-
 
 nnoremap <C-f> :FZF ~/Documents/vimwiki/<cr>
 nnoremap <C-g> :NV<cr>
@@ -357,15 +347,12 @@ nnoremap <leader>h :bp<cr>
 
 nnoremap <leader>z :VimwikiIndex 1<cr> :ZettelNew 
 
-
 nnoremap <leader>g1 :call SRSTODOSHORT()<cr>
 nnoremap <leader>g2  :call SRSTODOMEDIUM()<cr>
 nnoremap <leader>g3  :call SRSTODOLONG()<cr>
 command! -nargs=1 MRG execute "Rg" string(<q-args>) "~/Documents/vimwiki/"
 
-
 let g:ruby_host_prog = '/home/kabilan/.gem/ruby/3.0.0/bin/neovim-ruby-host'
-
 
 " PLUG settings
 "VIMTEX vimtex
