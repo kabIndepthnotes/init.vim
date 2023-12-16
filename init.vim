@@ -5,6 +5,8 @@
 " webdev side
 " general
 "
+" COPYRIGHT: GPL-3.0-only
+"
 " People who's code I used/inspiration
 " Hans Pinckaers
 " https://medium.com/@hanspinckaers/setting-up-vim-as-an-ide-for-python-773722142d1d
