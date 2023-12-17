@@ -193,33 +193,33 @@ highlight Conceal guibg=Black
 " This runs a bash script that gives the name of a vimwiki file in a few days.
 " Then it edits the file and pastes the "todo task" onto the page.
 " TODO make this shorter and more concise
-function! SRSTODOSHORT() " the postpone feature I used with roam and roam toolkit
+function! SRSTODOSHORT() abort " the postpone feature I used with roam and roam toolkit
     let page = system("$HOME/myScripts/myTodoShort")
     execute "edit " . page
     norm! gg
     norm! p
 endfunction
 
-function! SRSTODOMEDIUM()
+function! SRSTODOMEDIUM() abort
     let page = system("$HOME/myScripts/myTodoMedium")
     execute "edit " . page
     norm! gg
     norm! p
 endfunction
 
-function! SRSTODOLONG()
+function! SRSTODOLONG() abort
     let page = system("$HOME/myScripts/myTodoLong")
     execute "edit " . page
     norm! gg
     norm! p
 endfunction
 
-function! MyTexCompile()
+function! MyTexCompile() abort
     w
     execute "!pdflatex " . expand('%')
 endfunction
 
-function! GroffCompile()
+function! GroffCompile() abort
     execute "!groffCompile " . expand('%:t:r')
 endfunction
 
@@ -228,7 +228,7 @@ endfunction
 " This makes it easy to color latex equations for better understanding and
 " notes.
 " TODO make simpler, possibly with ultisnips
-function! ColorEquation1()
+function! ColorEquation1() abort
     if (&ft=='pandoc')
         norm! yy
         norm! I\color{c1} 
@@ -240,7 +240,7 @@ function! ColorEquation1()
     endif
 endfunction
 
-function! ColorEquation(number)
+function! ColorEquation(number) abort
     if (&ft=='pandoc')
         norm! yy
         let previousNumber = a:number - 1
@@ -266,14 +266,14 @@ endfunction
 " endfunction
 
 
-function! ColorEquationReset()
+function! ColorEquationReset() abort
     if (&ft=='pandoc')
         norm! I\color{default}
     endif
 endfunction
 
 " TODO fix config so that this is not necessary
-function! PandocToggle()
+function! PandocToggle() abort
     if (&ft=='vimwiki')
         :set filetype=pandoc
     elseif (&ft=='pandoc')
@@ -281,27 +281,27 @@ function! PandocToggle()
     endif
 endfunction
 
-function! FZFVimwiki()
+function! FZFVimwiki() abort
     :FZF ~/Documents/vimwiki/
 endfunction
 
-function! FindFiles()
+function! FindFiles() abort
     :NV<cr>
 endfunction
 
-function! Ccompile()
+function! Ccompile() abort
     if (&ft=='c')
         execute "!make " . expand('%:t:r')
     endif
 endfunction
 
-function! CRun()
+function! CRun() abort
     if (&ft=='c')
         execute "!./" . expand('%:t:r')
     endif
 endfunction
 
-function! MyZettel()
+function! MyZettel() abort
     VimwikiIndex 1
     norm :ZettelNew
 endfunction
@@ -324,7 +324,7 @@ nnoremap <C-z> <Esc>  " disable terminal ctrl-z
 let mapleader = ','
 let maplocalleader = "\\"
 "my change
-nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>ev :edit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 nnoremap <space> :nohl<CR>
@@ -408,33 +408,33 @@ let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 "pandoc
 let g:myPandocStart = 1
-function! MyPandocCompilerToggle()
+function! MyPandocCompilerToggle() abort
     let g:myPandocStart = !g:myPandocStart
 endfunction
-function! MyPandocCompiler()
+function! MyPandocCompiler() abort
     if g:myPandocStart == 1
         silent execute "!pandoc " . expand('%:t') . " -o " . expand('%:t:r') .  ".pdf "
     endif
 endfunction
 
 
-function! MyPandocCompilerWithDebug()
+function! MyPandocCompilerWithDebug() abort
     if g:myPandocStart == 1
         execute "!pandoc " . expand('%') . " -o " . expand('%:r') .  ".pdf"
     endif
 endfunction
 
-function! MyPandocOpenZathura()
+function! MyPandocOpenZathura() abort
     exec "!zathura " . expand('%:r') . ".pdf &" 
 endfunction
 
 
-function! MyPandocMakeToLatex()
+function! MyPandocMakeToLatex() abort
     %s/<!--//g "uncomment the math environments
     %s/-->//g "uncomment the math environments
 endfunction
 
-function! CopyToClipBoardPaste()
+function! CopyToClipBoardPaste() abort
    "exec "!cp -p \"`ls -dtr1 \"$HOME/Pictures/screenshots\"/* | tail -1`\" \"" . expand('%:p:h') . "\" "
    exec "!cp -p \"`ls -dtr1 \"$HOME/Pictures/screenshots\"/* | tail -1`\" \"" . "$HOME/Documents/vimwiki/figures" . "\" "
    norm! i{{file:~/Documents/vimwiki/figures/
@@ -445,7 +445,7 @@ function! CopyToClipBoardPaste()
    norm! A}}
 endfunction
 
-function! MyPandocMathToAnkiMath()
+function! MyPandocMathToAnkiMath() abort
     let a = ['\)','\(']
     %s/\$/\=reverse(a)[0]/g
 endfunction
