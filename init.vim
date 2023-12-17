@@ -77,18 +77,18 @@ augroup markdown
     "autocmd BufWritePost *.md call MyPandocCompilerWithDebug() " Adds a autowrite command that :todo: could be improved with asyncrun()
     " ColorEquation are to add easy colorized math equations from display
     " math.
-    autocmd Filetype pandoc nnoremap <leader>c :call MyPandocOpenZathura()<cr>
+    autocmd Filetype pandoc nnoremap <leader>c <Cmd>call MyPandocOpenZathura()<cr>
     " TODO make all the numbers fall into 1
-    autocmd Filetype pandoc nnoremap <leader>1 :call ColorEquation1()<cr>
-    autocmd Filetype pandoc nnoremap <leader>2 :call ColorEquation(2)<cr>
-    autocmd Filetype pandoc nnoremap <leader>3 :call ColorEquation(3)<cr>
-    autocmd Filetype pandoc nnoremap <leader>4 :call ColorEquation(4)<cr>
-    autocmd Filetype pandoc nnoremap <leader>5 :call ColorEquation(5)<cr>
-    autocmd Filetype pandoc nnoremap <leader>6 :call ColorEquation(6)<cr>
-    autocmd Filetype pandoc nnoremap <leader>7 :call ColorEquation(7)<cr>
-    autocmd Filetype pandoc nnoremap <leader>8 :call ColorEquation(8)<cr>
-    autocmd Filetype pandoc nnoremap <leader>9 :call ColorEquation(9)<cr>
-    autocmd Filetype pandoc nnoremap <leader>0 :call ColorEquationReset()<cr>
+    autocmd Filetype pandoc nnoremap <leader>1 <Cmd>call ColorEquation1()<cr>
+    autocmd Filetype pandoc nnoremap <leader>2 <Cmd>call ColorEquation(2)<cr>
+    autocmd Filetype pandoc nnoremap <leader>3 <Cmd>call ColorEquation(3)<cr>
+    autocmd Filetype pandoc nnoremap <leader>4 <Cmd>call ColorEquation(4)<cr>
+    autocmd Filetype pandoc nnoremap <leader>5 <Cmd>call ColorEquation(5)<cr>
+    autocmd Filetype pandoc nnoremap <leader>6 <Cmd>call ColorEquation(6)<cr>
+    autocmd Filetype pandoc nnoremap <leader>7 <Cmd>call ColorEquation(7)<cr>
+    autocmd Filetype pandoc nnoremap <leader>8 <Cmd>call ColorEquation(8)<cr>
+    autocmd Filetype pandoc nnoremap <leader>9 <Cmd>call ColorEquation(9)<cr>
+    autocmd Filetype pandoc nnoremap <leader>0 <Cmd>call ColorEquationReset()<cr>
     "autocmd Filetype pandoc inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
     "autocmd Filetype pandoc nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 	" autocmd BufEnter *.md set spell
@@ -98,8 +98,8 @@ augroup vimwiki2
     " Autowrite, silent exec vimwiki2 html
     autocmd!
     "autocmd BufWritePost *.viki,*.wiki silent! :Vimwiki2HTML
-    autocmd BufEnter *.viki,*.wiki nnoremap <leader>c :Vimwiki2HTML<cr>
-    autocmd BufEnter *.viki,*.wiki nnoremap <leader>p :call PandocToggle()<cr>
+    autocmd BufEnter *.viki,*.wiki nnoremap <leader>c <Cmd>Vimwiki2HTML<cr>
+    autocmd BufEnter *.viki,*.wiki nnoremap <leader>p <Cmd>call PandocToggle()<cr>
     autocmd BufEnter *.viki,*.wiki set autowriteall
     "autocmd TextChanged,TextChangedI *.viki,*.wiki silent write
 augroup END
@@ -111,8 +111,8 @@ augroup END
 
 augroup ccstuff
     autocmd!
-    autocmd Filetype c nnoremap <leader>r :call Ccompile()<cr>
-    autocmd Filetype c nnoremap <leader>e :call CRun()<cr>
+    autocmd Filetype c nnoremap <leader>r <Cmd>call Ccompile()<cr>
+    autocmd Filetype c nnoremap <leader>e <Cmd>call CRun()<cr>
 augroup END
 
 " check a filename of a wiki file and if there is not a date format then
@@ -324,32 +324,32 @@ nnoremap <C-z> <Esc>  " disable terminal ctrl-z
 let mapleader = ','
 let maplocalleader = "\\"
 "my change
-nnoremap <leader>ev :edit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>ev <Cmd>edit $MYVIMRC<CR>
+nnoremap <leader>sv <Cmd>source $MYVIMRC<CR>
 
-nnoremap <space> :nohl<CR>
+nnoremap <space> <Cmd>nohl<CR>
 
 "yank a line TODO save cursor position
 nnoremap yo ^y$
 
-nnoremap <C-f> :FZF ~/Documents/vimwiki/<cr>
-nnoremap <C-g> :NV<cr>
+nnoremap <C-f> <Cmd>FZF ~/Documents/vimwiki/<cr>
+nnoremap <C-g> <Cmd>NV<cr>
 
 vnoremap <C-c> "+y
 nnoremap <C-v> "+p
 
-nnoremap <leader>l :bn<cr>
-nnoremap <leader>h :bp<cr>
+nnoremap <leader>l <Cmd>bn<cr>
+nnoremap <leader>h <Cmd>bp<cr>
 
 "vimwiki "zettelkasten
 "nnoremap <leader>o :Rg :
 "nnoremap <C-f> :call CopyToClipBoardPaste()<cr>
 
-nnoremap <leader>z :VimwikiIndex 1<cr> :ZettelNew 
+nnoremap <leader>z <Cmd>VimwikiIndex 1<cr> :ZettelNew 
 
-nnoremap <leader>g1 :call SRSTODOSHORT()<cr>
-nnoremap <leader>g2  :call SRSTODOMEDIUM()<cr>
-nnoremap <leader>g3  :call SRSTODOLONG()<cr>
+nnoremap <leader>g1 <Cmd>call SRSTODOSHORT()<cr>
+nnoremap <leader>g2  <Cmd>call SRSTODOMEDIUM()<cr>
+nnoremap <leader>g3  <Cmd>call SRSTODOLONG()<cr>
 command! -nargs=1 MRG execute "Rg" string(<q-args>) "~/Documents/vimwiki/"
 
 let g:ruby_host_prog = '/home/kabilan/.gem/ruby/3.0.0/bin/neovim-ruby-host'
