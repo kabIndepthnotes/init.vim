@@ -77,20 +77,20 @@ augroup markdown
     "autocmd BufWritePost *.md call MyPandocCompilerWithDebug() " Adds a autowrite command that :todo: could be improved with asyncrun()
     " ColorEquation are to add easy colorized math equations from display
     " math.
-    autocmd Filetype pandoc nnoremap <leader>c <Cmd>call MyPandocOpenZathura()<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>c <Cmd>call MyPandocOpenZathura()<cr>
     " TODO make all the numbers fall into 1
-    autocmd Filetype pandoc nnoremap <leader>1 <Cmd>call ColorEquation1()<cr>
-    autocmd Filetype pandoc nnoremap <leader>2 <Cmd>call ColorEquation(2)<cr>
-    autocmd Filetype pandoc nnoremap <leader>3 <Cmd>call ColorEquation(3)<cr>
-    autocmd Filetype pandoc nnoremap <leader>4 <Cmd>call ColorEquation(4)<cr>
-    autocmd Filetype pandoc nnoremap <leader>5 <Cmd>call ColorEquation(5)<cr>
-    autocmd Filetype pandoc nnoremap <leader>6 <Cmd>call ColorEquation(6)<cr>
-    autocmd Filetype pandoc nnoremap <leader>7 <Cmd>call ColorEquation(7)<cr>
-    autocmd Filetype pandoc nnoremap <leader>8 <Cmd>call ColorEquation(8)<cr>
-    autocmd Filetype pandoc nnoremap <leader>9 <Cmd>call ColorEquation(9)<cr>
-    autocmd Filetype pandoc nnoremap <leader>0 <Cmd>call ColorEquationReset()<cr>
-    "autocmd Filetype pandoc inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
-    "autocmd Filetype pandoc nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>1 <Cmd>call ColorEquation1()<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>2 <Cmd>call ColorEquation(2)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>3 <Cmd>call ColorEquation(3)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>4 <Cmd>call ColorEquation(4)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>5 <Cmd>call ColorEquation(5)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>6 <Cmd>call ColorEquation(6)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>7 <Cmd>call ColorEquation(7)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>8 <Cmd>call ColorEquation(8)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>9 <Cmd>call ColorEquation(9)<cr>
+    autocmd Filetype pandoc nnoremap <buffer> <leader>0 <Cmd>call ColorEquationReset()<cr>
+    "autocmd Filetype pandoc inoremap <buffer> <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+    "autocmd Filetype pandoc nnoremap <buffer> <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 	" autocmd BufEnter *.md set spell
 augroup END
 
@@ -111,8 +111,8 @@ augroup END
 
 augroup ccstuff
     autocmd!
-    autocmd Filetype c nnoremap <leader>r <Cmd>call Ccompile()<cr>
-    autocmd Filetype c nnoremap <leader>e <Cmd>call CRun()<cr>
+    autocmd Filetype c nnoremap <buffer> <leader>r <Cmd>call Ccompile()<cr>
+    autocmd Filetype c nnoremap <buffer> <leader>e <Cmd>call CRun()<cr>
 augroup END
 
 " check a filename of a wiki file and if there is not a date format then
