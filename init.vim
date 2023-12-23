@@ -29,6 +29,7 @@
 " LSP for less writing and quicker workflow
 " Treesitter for syntax highlighting
 " Use native plugin of neovim
+" migrate to lua
 
 " PLUGS
 
@@ -230,27 +231,27 @@ endfunction
 " TODO make simpler, possibly with ultisnips
 function! ColorEquation1() abort
     if (&ft=='pandoc')
-        norm! yy
-        norm! I\color{c1} 
-        norm! jm'
-        /\$\$
-        norm! pI<!--
-        norm! A-->
-        norm! I\color{c1} 
+	norm! yy
+	norm! I\color{c1} 
+	norm! jm'
+	/\$\$
+	norm! pI<!--
+	norm! A-->
+	norm! I\color{c1} 
     endif
 endfunction
 
 function! ColorEquation(number) abort
     if (&ft=='pandoc')
-        norm! yy
-        let previousNumber = a:number - 1
-        let tagCommand = "normal!  I\\color{c". a:number. "}"
-        execute tagCommand
-        norm! jm'
-        execute "/\color{c" . previousNumber . "}"
-        norm! pI<!--
-        norm! A-->
-        execute tagCommand
+	norm! yy
+	let previousNumber = a:number - 1
+	let tagCommand = "normal!  I\\color{c". a:number. "}"
+	execute tagCommand
+	norm! jm'
+	execute "/\color{c" . previousNumber . "}"
+	norm! pI<!--
+	norm! A-->
+	execute tagCommand
     endif
 endfunction
 
@@ -268,16 +269,7 @@ endfunction
 
 function! ColorEquationReset() abort
     if (&ft=='pandoc')
-        norm! I\color{default}
-    endif
-endfunction
-
-" TODO fix config so that this is not necessary
-function! PandocToggle() abort
-    if (&ft=='vimwiki')
-        :set filetype=pandoc
-    elseif (&ft=='pandoc')
-        :set filetype=vimwiki
+	norm! I\color{default}
     endif
 endfunction
 
@@ -291,13 +283,13 @@ endfunction
 
 function! Ccompile() abort
     if (&ft=='c')
-        execute "!make " . expand('%:t:r')
+	execute "!make " . expand('%:t:r')
     endif
 endfunction
 
 function! CRun() abort
     if (&ft=='c')
-        execute "!./" . expand('%:t:r')
+	execute "!./" . expand('%:t:r')
     endif
 endfunction
 
@@ -378,18 +370,18 @@ let g:vimwiki_key_mappings =
     \   'headers': 1,
     \   'text_objs': 1,
     \   'table_format': 1,
-    \   'table_mappings': 1,
+    \   'table_mappings': 0,
     \   'lists': 1,
-    \   'links': 1,
+    \   'links': 0,
     \   'html': 1,
     \   'mouse': 1,
     \ }
 
 let g:vimwiki_list = [
-            \ {'path': '~/Documents/vimwiki/', 'path_html': '~/Documents/vimwiki_html/',
-            \ 'template_path': '$HOME/Documents/indepthnotesWiki/',
-            \ 'template_default': 'template',
-            \ 'template_ext': '.html'}]
+	    \ {'path': '~/Documents/vimwiki/', 'path_html': '~/Documents/vimwiki_html/',
+	    \ 'template_path': '$HOME/Documents/indepthnotesWiki/',
+	    \ 'template_default': 'template',
+	    \ 'template_ext': '.html'}]
 
 
 let g:tex_conceal_frac=1
@@ -413,21 +405,20 @@ function! MyPandocCompilerToggle() abort
 endfunction
 function! MyPandocCompiler() abort
     if g:myPandocStart == 1
-        silent execute "!pandoc " . expand('%:t') . " -o " . expand('%:t:r') .  ".pdf "
+	silent execute "!pandoc " . expand('%:t') . " -o " . expand('%:t:r') .  ".pdf "
     endif
 endfunction
 
 
 function! MyPandocCompilerWithDebug() abort
     if g:myPandocStart == 1
-        execute "!pandoc " . expand('%') . " -o " . expand('%:r') .  ".pdf"
+	execute "!pandoc " . expand('%') . " -o " . expand('%:r') .  ".pdf"
     endif
 endfunction
 
 function! MyPandocOpenZathura() abort
     exec "!zathura " . expand('%:r') . ".pdf &" 
 endfunction
-
 
 function! MyPandocMakeToLatex() abort
     %s/<!--//g "uncomment the math environments
@@ -450,5 +441,3 @@ function! MyPandocMathToAnkiMath() abort
     %s/\$/\=reverse(a)[0]/g
 endfunction
 
-" function! MyPandocCheatSheetToAnkiImport()
-" endfunction
